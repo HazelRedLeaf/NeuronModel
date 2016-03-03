@@ -2,6 +2,11 @@ import math
 import numpy as np
 import matplotlib.pyplot as plt
 
+def floatrange(x, y, step):
+    while x < y:
+        yield x
+        x += step
+
 #############################################################
 # variables                                                 #
 #                                                           #
@@ -27,7 +32,7 @@ I_e = 3.1
 V = []
 V.append(V_r)
 
-# i represents each millisecond
+# t represents each millisecond
 for t in range(1, 1000):
     V.append(V[t - 1] + (E_l - V[t - 1] + R_m * I_e) / tau_m)
     if V[t] >= V_t:
@@ -61,7 +66,7 @@ I_e -= 0.1
 V = []
 V.append(V_r)
 
-# i represents each millisecond
+# t represents each millisecond
 for t in range(1, 1000):
     V.append(V[t - 1] + (E_l - V[t - 1] + R_m * I_e) / tau_m)
     if V[t] >= V_t:
@@ -80,6 +85,34 @@ plt.show()
 
 #############################################################
 # Question 4.
+
+# initialise empty array for all spikes
+spikes = []
+I_e_s = []
+
+for I_e in floatrange(2.0, 5.1, 0.1):
+    I_e_s.append(I_e)
+
+# i represents each input current
+# t represents each millisecond
+for I_e in floatrange(2.0, 5.1, 0.1):
+    spikes.append(0)
+    # initialise empty array for all voltage values
+    V = []
+    V.append(V_r)
+    for t in range(1, 1000):
+        V.append(V[t - 1] + (E_l - V[t - 1] + R_m * I_e) / tau_m)
+        if V[t] >= V_t:
+            V[t] = V_r
+            spikes[-1] += 1
+
+# plot the results
+plt.figure(2)
+plt.plot(I_e_s, spikes)
+plt.title('Integrate and fire neuron 3')
+plt.xlabel('Input current (nA)')
+plt.ylabel('spikes (no.)')
+plt.show()
 
 #############################################################
 
