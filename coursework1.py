@@ -1,5 +1,6 @@
 import math
 import numpy as np
+import random
 import matplotlib.pyplot as plt
 
 def floatrange(x, y, step):
@@ -119,6 +120,100 @@ plt.show()
 
 #############################################################
 # Question 5.
+
+#############################################################
+# variables                                                 #
+#                                                           #
+# tau_m = 20 ms         - membrane time constant            #
+# E_l = -70 mV          - leak potential                    #
+# V_r = -80 mV          - reset voltage                     #
+# V_t = -54 mV          - threshold                         #
+# R_m * I_e = 18 mV     - resitance * current               #
+#                                                           #
+# Synapses                                                  #
+# R_m * g_s = 0.15                                          #
+# P = 0.5                                                  #
+# tau_s = 10 ms                                             #
+# a) E_s = 0 mV                                             #
+# b) E_s = -80 mV                                           #
+#############################################################
+tau_m = 20
+E_l = -70
+V_r = -80
+V_t = -54
+R_m_I_e = 18
+R_m_g_s = 0.15
+P = 0.5
+tau_s = 10
+
+# a)
+E_s = 0
+
+# initialise empty array for all voltage values
+V_1 = []
+v_1 = random.uniform(V_r, V_t)
+V_1.append(v_1)
+t_1 = 0
+V_2 = []
+v_2 = random.uniform(V_r, V_t)
+V_2.append(v_2)
+t_2 = 0
+
+# t represents each millisecond
+for t in range(1, 1000):
+    V_1.append(V_1[-1] + (E_l + R_m_I_e - V_1[-1] - R_m_g_s * P * math.exp(- (t - t_2) / tau_s) * (V_1[-1] - E_s)) / tau_m)
+    if V_1[-1] >= V_t:
+        V_1[-1] = V_r
+        t_1 = t + 1
+    V_2.append(V_2[-1] + (E_l + R_m_I_e - V_2[-1] - R_m_g_s * P * math.exp(- (t - t_1) / tau_s) * (V_2[-1] - E_s)) / tau_m)
+    if V_2[-1] >= V_t:
+        V_2[-1] = V_r
+        t_2 = t + 1
+
+# plot the results
+plt.figure(3)
+plt1, = plt.plot(V_1, color = 'r')
+plt2, = plt.plot(V_2, color = 'b')
+plt.title('Interprojection of two neurons (excitatory synapses)')
+plt.xlabel('Time (ms)')
+plt.ylabel('Voltage (mV)')
+plt.show()
+
+
+# b)
+E_s = -80
+
+# initialise empty array for all voltage values
+V_1 = []
+#v_1 = random.uniform(V_r, V_t)
+v_1 = -80
+V_1.append(v_1)
+t_1 = 0
+V_2 = []
+#v_2 = random.uniform(V_r, V_t)
+v_2 = -79
+V_2.append(v_2)
+t_2 = 0
+
+# t represents each millisecond
+for t in range(1, 1000):
+    V_1.append(V_1[-1] + (E_l + R_m_I_e - V_1[-1] - R_m_g_s * P * math.exp(- (t - t_2) / tau_s) * (V_1[-1] - E_s)) / tau_m)
+    if V_1[-1] >= V_t:
+        V_1[-1] = V_r
+        t_1 = t + 1
+    V_2.append(V_2[-1] + (E_l + R_m_I_e - V_2[-1] - R_m_g_s * P * math.exp(- (t - t_1) / tau_s) * (V_2[-1] - E_s)) / tau_m)
+    if V_2[-1] >= V_t:
+        V_2[-1] = V_r
+        t_2 = t + 1
+
+# plot the results
+plt.figure(4)
+plt1, = plt.plot(V_1, color = 'r')
+plt2, = plt.plot(V_2, color = 'b')
+plt.title('Interprojection of two neurons (inhibitory synapses)')
+plt.xlabel('Time (ms)')
+plt.ylabel('Voltage (mV)')
+plt.show()
 
 #############################################################
 
