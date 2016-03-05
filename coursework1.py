@@ -42,7 +42,7 @@ for t in range(1, 1000):
 # plot the results
 plt.figure(0)
 plt.plot(V)
-plt.title('Integrate and fire neuron')
+plt.title('Integrate and fire neuron model')
 plt.xlabel('Time (ms)')
 plt.ylabel('Voltage (mV)')
 plt.show()
@@ -53,7 +53,7 @@ plt.show()
 # Question 2.
 
 I_e = (V_t - E_l) / R_m
-print("I_e = ", I_e)
+print("I_e_min = ", I_e) #to add nA
 
 #############################################################
 
@@ -76,7 +76,7 @@ for t in range(1, 1000):
 # plot the results
 plt.figure(1)
 plt.plot(V)
-plt.title('Integrate and fire neuron 2')
+plt.title('Integrate and fire neuron model')
 plt.xlabel('Time (ms)')
 plt.ylabel('Voltage (mV)')
 plt.show()
@@ -110,7 +110,7 @@ for I_e in floatrange(2.0, 5.1, 0.1):
 # plot the results
 plt.figure(2)
 plt.plot(I_e_s, spikes)
-plt.title('Integrate and fire neuron 3')
+plt.title('Firing rate of neurons')
 plt.xlabel('Input current (nA)')
 plt.ylabel('spikes (no.)')
 plt.show()
@@ -132,7 +132,7 @@ plt.show()
 #                                                           #
 # Synapses                                                  #
 # R_m * g_s = 0.15                                          #
-# P = 0.5                                                  #
+# P = 0.5                                                   #
 # tau_s = 10 ms                                             #
 # a) E_s = 0 mV                                             #
 # b) E_s = -80 mV                                           #
@@ -220,6 +220,49 @@ plt.show()
 
 #############################################################
 # Question 6.
+
+#############################################################
+# variables                                                 #
+#                                                           #
+# tau_m = 10 ms         - membrane time constant            #
+# E_l = V_r = -70 mV    - leak potential = reset voltage    #
+# V_t = -40 mV          - threshold                         #
+# R_m = 10 MOmega       - resitance                         #
+# I_e = 3.1 nA          - current                           #
+# E_k = -80 mV          - reversal potential                #
+# dR = 0.005 MOmega-1   - conductance increase              #
+# tau = 200 ms          - time constant                     #
+# dt = 1 ms             - for 1 second                      #
+#############################################################
+
+tau_m = 10
+V_r = -70
+V_t = -40
+R_m = 10
+I_e = 3.1
+E_k = -80
+G_m = 1 / R_m
+tau = 200
+
+# initialise empty array for all voltage values
+V = []
+V.append(V_r)
+
+# t represents each millisecond
+for t in range(1, 1000):
+    V.append(V[-1] + (E_k - V[-1] + (R_m + 1 / G_m) * I_e) / tau_m)
+    G_m += G_m / tau
+    if V[-1] > V_t:
+        V[-1] = V_r
+        G_m += 0.005
+
+# plot the results
+plt.figure(5)
+plt.plot(V)
+plt.title('Integrate and fire neuron with a potassium current')
+plt.xlabel('Time (ms)')
+plt.ylabel('Voltage (mV)')
+plt.show()
 
 #############################################################
 
