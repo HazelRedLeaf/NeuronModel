@@ -91,12 +91,12 @@ plt.show()
 spikes = []
 I_e_s = []
 
-for I_e in floatrange(2.0, 5.1, 0.1):
+for I_e in floatrange(2.0, 5.0, 0.1):
     I_e_s.append(I_e)
 
 # i represents each input current
 # t represents each millisecond
-for I_e in floatrange(2.0, 5.1, 0.1):
+for I_e in floatrange(2.0, 5.0, 0.1):
     spikes.append(0)
     # initialise empty array for all voltage values
     V = []
