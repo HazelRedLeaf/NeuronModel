@@ -185,13 +185,13 @@ E_s = -80
 
 # initialise empty array for all voltage values
 V_1 = []
-#v_1 = random.uniform(V_r, V_t)
-v_1 = -80
+v_1 = random.uniform(V_r, V_t)
+#v_1 = -80
 V_1.append(v_1)
 t_1 = 0
 V_2 = []
-#v_2 = random.uniform(V_r, V_t)
-v_2 = -79
+v_2 = random.uniform(V_r, V_t)
+#v_2 = -79
 V_2.append(v_2)
 t_2 = 0
 
@@ -238,11 +238,12 @@ plt.show()
 tau_m = 10
 V_r = -70
 V_t = -40
-R_m = 10
+R_m = 10.
 I_e = 3.1
-E_k = -80
-G_m = 1 / R_m
-tau = 200
+E_k = -80.
+E_l = -70.
+G_m = 0
+tau = 200.
 
 # initialise empty array for all voltage values
 V = []
@@ -250,11 +251,11 @@ V.append(V_r)
 
 # t represents each millisecond
 for t in range(1, 1000):
-    V.append(V[-1] + (E_k - V[-1] + (R_m + 1 / G_m) * I_e) / tau_m)
-    G_m += G_m / tau
+    V.append(V[-1] + (E_l - V[-1] + (R_m * I_e) + R_m * G_m * (E_k - V[-1])) / tau_m)
+    G_m -= G_m / tau
     if V[-1] > V_t:
         V[-1] = V_r
-        G_m += 0.005
+        G_m += 0.0005
 
 # plot the results
 plt.figure(5)

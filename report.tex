@@ -1,0 +1,149 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Large Colored Title Article
+% LaTeX Template
+% Version 1.1 (25/11/12)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+% Original author:
+% Frits Wenneker (http://www.howtotex.com)
+%
+% License:
+% CC BY-NC-SA 3.0 (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[DIV=calc, paper=a4, fontsize=11pt, twocolumn]{article}	 % A4 paper and 11pt font size
+
+\usepackage{graphicx} % enables importing images
+\usepackage[cm]{fullpage} % page margin fix
+\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template - will be removed in final version
+\usepackage[english]{babel} % English language/hyphenation
+\usepackage[protrusion=true,expansion=true]{microtype} % Better typography
+\usepackage{amsmath,amsfonts,amsthm} % Math packages
+\usepackage[svgnames]{xcolor} % Enabling colors by their 'svgnames'
+\usepackage[hang, small,labelfont=bf,up,textfont=it,up]{caption} % Custom captions under/above floats in tables or figures
+\usepackage{booktabs} % Horizontal rules in tables
+\usepackage{fix-cm}	 % Custom font sizes - used for the initial letter in the document
+\usepackage{float}
+
+\usepackage{sectsty} % Enables custom section titles
+\usepackage{titlesec} % enables inserting margins around sections and subsections
+
+\allsectionsfont{\usefont{OT1}{phv}{b}{n}} % Change the font of all section commands
+
+\usepackage{pgfplots} % package to plot graphs using data
+\usepackage{fancyhdr} % Needed to define custom headers/footers
+\pagestyle{fancy} % Enables the custom headers/footers
+\usepackage{lastpage} % Used to determine the number of pages in the document (for "Page X of Total")
+
+% Headers
+% raisebox moves text in header up, header text needs to be enclosed in curly brackets
+\lhead{\raisebox{0.5\height} {COMS30127 - Computational Neuroscience}}
+\chead{}
+\rhead{\raisebox{0.5\height} {mm13354}}
+
+% Footers
+\lfoot{}
+\cfoot{}
+\rfoot{\footnotesize Page \thepage\ of \pageref{LastPage}} % "Page 1 of 2"
+
+\renewcommand{\headrulewidth}{0.2pt} % Thin header rule
+\renewcommand{\footrulewidth}{0.4pt} % Thin footer rule
+\headsep 5pt
+\usepackage{lettrine} % Package to accentuate the first letter of the text
+\newcommand{\initial}[1]{ % Defines the command and style for the first letter
+	\lettrine[lines=3,lhang=0.3,nindent=0em]{
+		\color{Teal}
+		{\textsf{#1}}}{}}
+
+\setlength{\intextsep}{2pt}
+\setlength{\textfloatsep}{2pt}
+%----------------------------------------------------------------------------------------
+%	TITLE SECTION
+%----------------------------------------------------------------------------------------
+
+\usepackage{titling} % Allows custom title configuration
+
+\newcommand{\HorRule}{\color{Teal} \rule{\linewidth}{1pt}} % Defines the blue horizontal rule under the title
+	
+
+\pretitle{\vspace{-10pt} \begin{center} \fontsize{25}{25} \usefont{OT1}{phv}{b}{n} \color{Teal} \selectfont} % Horizontal rule before the title
+	
+	\title{Neuron Model} % Your article title
+	
+	\posttitle{\end{center}} % Whitespace under the title
+
+\preauthor{ \begin{center}\large \lineskip -1em \usefont{OT1}{phv}{b}{sl} \color{Teal}} % Author font configuration
+	
+	\author{Maria Marinova} % Your name
+	
+	\postauthor{\vspace{-10pt} \footnotesize \usefont{OT1}{phv}{m}{sl} \color{Black} % Configuration for the institution name
+		
+		\par\end{center}\HorRule } % Horizontal rule after the title
+
+\date{\vspace{-30pt}} % Add a date here if you would like one to appear underneath the title block
+
+%----------------------------------------------------------------------------------------
+
+\begin{document}
+	
+	\maketitle % Print the title
+	
+	\thispagestyle{fancy} % Enabling the custom headers/footers for the first page 
+	
+	%----------------------------------------------------------------------------------------
+	%	INTRODUCTION
+	%----------------------------------------------------------------------------------------
+	
+	% The first character should be within \initial{}
+	\initial{T}\textbf{he aim of this report is to highlight different cases of neuron modelling. The analysis is largely based on graphs, and the language of implementation is Python.}
+	
+	%----------------------------------------------------------------------------------------
+	%	ARTICLE CONTENTS
+	%----------------------------------------------------------------------------------------
+	
+	\subsection*{Q1. Integrate and fire model}
+		\begin{figure}[H]
+			\includegraphics*[height = 4cm, width = 10cm]{q1}
+		\end{figure}
+	\subsection*{Q2. Minimum current for action potential}
+		\begin{equation}
+			I_e = \dfrac{V_t - E_l}{R_m}
+		\end{equation}
+		\begin{equation}
+			I_e = \dfrac{-40 - (-70)}{10}
+		\end{equation}
+		\begin{equation}
+			I_e = \dfrac{30}{10} = 3.0 nA
+		\end{equation}
+	\subsection*{Q3. Integrate and fire model with lower than the minimum current}
+	The current is lower that the current needed for a spike, hence no spikes are observed.
+		\begin{figure}[H]
+			\includegraphics*[height = 4cm, width = 10cm]{q3}
+		\end{figure}
+	\subsection*{Q4. Firing rate as function of the input current}
+		\begin{figure}[H]
+			\includegraphics*[height = 4cm, width = 10cm]{q4}
+		\end{figure}
+	\subsection*{Q5. Interprojection of two neurons}
+		\begin{figure}[H]
+			\includegraphics*[height = 4cm, width = 10cm]{q5a}
+		\end{figure}
+		\begin{figure}[H]
+			\includegraphics*[height = 4cm, width = 10cm]{q5b}
+		\end{figure}
+	\subsection*{Q6. Integrate and fire model with potassium current}
+		\begin{figure}[H]
+			\includegraphics*[height = 4cm, width = 10cm]{q6} % 
+		\end{figure}
+	\subsection*{Q7. Hodgkin-Huxley neuron}
+	
+	%------------------------------------------------
+	
+\end{document}
