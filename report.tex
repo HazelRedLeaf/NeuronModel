@@ -18,11 +18,10 @@
 %	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
 %----------------------------------------------------------------------------------------
 
-\documentclass[DIV=calc, paper=a4, fontsize=11pt, twocolumn]{article}	 % A4 paper and 11pt font size
+\documentclass[DIV=calc, paper=a4, fontsize=12pt, twocolumn]{article}	 % A4 paper and 11pt font size
 
 \usepackage{graphicx} % enables importing images
 \usepackage[cm]{fullpage} % page margin fix
-\usepackage{lipsum} % Used for inserting dummy 'Lorem ipsum' text into the template - will be removed in final version
 \usepackage[english]{babel} % English language/hyphenation
 \usepackage[protrusion=true,expansion=true]{microtype} % Better typography
 \usepackage{amsmath,amsfonts,amsthm} % Math packages
@@ -107,42 +106,60 @@
 	%----------------------------------------------------------------------------------------
 	%	ARTICLE CONTENTS
 	%----------------------------------------------------------------------------------------
-	
+	\vfill
 	\subsection*{Q1. Integrate and fire model}
 		\begin{figure}[H]
-			\includegraphics*[height = 4cm, width = 10cm]{q1}
+			\includegraphics*[width = 9.5cm]{q1}
 		\end{figure}
+	
+	A neuron simulation with the integrate and fire model, Euler's method is used with a timestep $\delta t = 1 ms$. The current is enough for multiple spikes to be produced.
+	\vfill
+		
 	\subsection*{Q2. Minimum current for action potential}
 		\begin{equation}
 			I_e = \dfrac{V_t - E_l}{R_m}
 		\end{equation}
 		\begin{equation}
-			I_e = \dfrac{-40 - (-70)}{10}
+			I_e = \dfrac{-40 mV - (-70 mV)}{10M\Omega}
 		\end{equation}
 		\begin{equation}
-			I_e = \dfrac{30}{10} = 3.0 nA
+			I_e = \dfrac{30 mV}{10M\Omega} = 3.0 nA
 		\end{equation}
+	\vfill
+		
 	\subsection*{Q3. Integrate and fire model with lower than the minimum current}
-	The current is lower that the current needed for a spike, hence no spikes are observed.
+	The current is $0.1 nA$ lower that the current needed for a spike -- $I_e = 2.9 nA$ -- hence no spikes are observed.
 		\begin{figure}[H]
-			\includegraphics*[height = 4cm, width = 10cm]{q3}
+			\includegraphics*[width = 9.5cm]{q3}
 		\end{figure}
+	\vfill	
+		
 	\subsection*{Q4. Firing rate as function of the input current}
+	Plot of the fire rate as a function of the input current. Spikes start being produced at $I_e = 3.0 nA$, which is the minimum input current for action potential.
 		\begin{figure}[H]
-			\includegraphics*[height = 4cm, width = 10cm]{q4}
+			\includegraphics*[width = 9.5cm]{q4}
 		\end{figure}
+		
+	\vfill
 	\subsection*{Q5. Interprojection of two neurons}
+	In both cases two neurons with synaptic connections between each other and with the same parameters are simulated. 
+	\par 
+	In the first case, the synapses are excitatory with reversal potential $E_s = 0 mV$. It can be observed that the two neurons' membrane potential converges.
 		\begin{figure}[H]
-			\includegraphics*[height = 4cm, width = 10cm]{q5a}
+			\includegraphics*[width = 9.5cm]{q5a}
 		\end{figure}
+	In the second case, the synapses are inhibitory with reversal potential $E_s = -80 mV$. Unlike in the previous case, the two neurons' membrane potential diverges.
 		\begin{figure}[H]
-			\includegraphics*[height = 4cm, width = 10cm]{q5b}
+			\includegraphics*[width = 9.5cm]{q5b}
 		\end{figure}
+	\vfill
+	\eject
 	\subsection*{Q6. Integrate and fire model with potassium current}
-		\begin{figure}[H]
-			\includegraphics*[height = 4cm, width = 10cm]{q6} 
+	The neuron simulated in this question has the same parameters as the one in Q1. However, a slow potassium current with reversal potential $E_K = -80mV$ is added.
+	\par
+		\begin{figure}[htb]
+			\includegraphics*[width = 8cm]{q6} 
 		\end{figure}
-	\subsection*{Q7. Hodgkin-Huxley neuron}
 	
 	%------------------------------------------------
 	
